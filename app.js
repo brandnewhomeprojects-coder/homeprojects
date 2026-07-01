@@ -1,5 +1,5 @@
 async function loadProjects() {
-  const res = await fetch("data.json");
+  const res = await fetch("./data.json", { cache: "no-store" });
   const projects = await res.json();
 
   const container = document.getElementById("projects");
