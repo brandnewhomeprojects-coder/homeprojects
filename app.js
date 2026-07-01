@@ -6,10 +6,10 @@ async function loadProjects() {
 
   projects.forEach((project, index) => {
 
-    const projectHTML = document.createElement("div");
-    projectHTML.classList.add("project");
+    const div = document.createElement("div");
+    div.className = "project";
 
-    projectHTML.innerHTML = `
+    div.innerHTML = `
       <div class="swiper swiper-${index}">
         <div class="swiper-wrapper">
           ${project.images.map(img => `
@@ -24,14 +24,16 @@ async function loadProjects() {
       <p>${project.description}</p>
     `;
 
-    container.appendChild(projectHTML);
+    container.appendChild(div);
 
-    new Swiper(`.swiper-${index}`, {
-      loop: true,
-      spaceBetween: 10,
-    });
+    setTimeout(() => {
+      new Swiper(`.swiper-${index}`, {
+        loop: true,
+        spaceBetween: 10,
+      });
+    }, 0);
 
   });
 }
 
-loadProjects();
+document.addEventListener("DOMContentLoaded", loadProjects);
