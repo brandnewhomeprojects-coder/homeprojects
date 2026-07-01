@@ -41,3 +41,20 @@ body {
   transform: scale(1.05);
   opacity: 0.9;
 }
+
+.hero {
+  text-align: center;
+  padding: 120px 20px;
+  background: radial-gradient(circle at top, #1e293b, #0b1220);
+}
+
+.hero h1 {
+  font-size: 52px;
+  font-weight: 700;
+}
+
+.hero p {
+  opacity: 0.75;
+  max-width: 600px;
+  margin: 0 auto 20px auto;
+}
