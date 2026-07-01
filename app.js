@@ -1,4 +1,5 @@
-async function loadProjects() {
+document.addEventListener("DOMContentLoaded", async () => {
+
   const res = await fetch("./data.json", { cache: "no-store" });
   const projects = await res.json();
 
@@ -6,10 +7,10 @@ async function loadProjects() {
 
   projects.forEach((project, index) => {
 
-    const div = document.createElement("div");
-    div.className = "project";
+    const wrapper = document.createElement("div");
+    wrapper.className = "project";
 
-    div.innerHTML = `
+    wrapper.innerHTML = `
       <div class="swiper swiper-${index}">
         <div class="swiper-wrapper">
           ${project.images.map(img => `
@@ -18,22 +19,32 @@ async function loadProjects() {
             </div>
           `).join("")}
         </div>
+
+        <div class="swiper-pagination"></div>
       </div>
 
       <h2>${project.title}</h2>
       <p>${project.description}</p>
     `;
 
-    container.appendChild(div);
-
-    setTimeout(() => {
-      new Swiper(`.swiper-${index}`, {
-        loop: true,
-        spaceBetween: 10,
-      });
-    }, 0);
+    container.appendChild(wrapper);
 
   });
-}
 
-document.addEventListener("DOMContentLoaded", loadProjects);
+  // 🔥 IMPORTANT: inițializează DUPĂ ce tot DOM-ul există
+  setTimeout(() => {
+
+    document.querySelectorAll(".swiper").forEach((el) => {
+      new Swiper(el, {
+        loop: true,
+        spaceBetween: 10,
+        pagination: {
+          el: el.querySelector(".swiper-pagination"),
+          clickable: true,
+        }
+      });
+    });
+
+  }, 50);
+
+});
