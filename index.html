@@ -4,173 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Portfolio</title>
+  <title>Proiecte</title>
 
-  <!-- FONT -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <!-- SWIPER (dacă îl folosești în galerie mai târziu) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <style>
-    html { scroll-behavior: smooth; }
-  </style>
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="logo">Portfolio</div>
-
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">Despre</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Proiecte</a></li>
-    <li><a href="#gallery">Galerie</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<header class="hero" id="home">
-  <h1>Numele Tău / Proiect</h1>
-  <p>Portofoliu modern realizat cu HTML, CSS și JavaScript.</p>
-
-  <div class="buttons">
-    <a href="#" target="_blank">GitHub</a>
-    <a href="#" target="_blank">Demo</a>
-  </div>
+<header class="hero">
+  <h1>Proiectele mele</h1>
+  <p>Colecție de proiecte personale cu imagini și descrieri</p>
 </header>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <h2>Despre</h2>
-  <p>
-    Aici explici cine ești și ce face acest proiect.
-  </p>
-</section>
+<main>
+  <section id="projects" class="projects"></section>
+</main>
 
-<!-- SKILLS -->
-<section class="skills" id="skills">
-  <h2>Skills</h2>
-
-  <div class="skill">
-    <p>HTML</p>
-    <div class="bar"><span data-width="90%"></span></div>
-  </div>
-
-  <div class="skill">
-    <p>CSS</p>
-    <div class="bar"><span data-width="85%"></span></div>
-  </div>
-
-  <div class="skill">
-    <p>JavaScript</p>
-    <div class="bar"><span data-width="70%"></span></div>
-  </div>
-
-  <div class="skill">
-    <p>Git / GitHub</p>
-    <div class="bar"><span data-width="75%"></span></div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section class="projects" id="projects">
-  <h2>Proiecte</h2>
-
-  <div class="projects-grid">
-
-    <div class="project-card">
-      <h3>Proiect 1</h3>
-      <p>Descriere scurtă a proiectului.</p>
-      <div class="tags">HTML • CSS • JS</div>
-      <div class="links">
-        <a href="#">GitHub</a>
-        <a href="#">Demo</a>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <h3>Proiect 2</h3>
-      <p>Descriere scurtă a proiectului.</p>
-      <div class="tags">API • JS</div>
-      <div class="links">
-        <a href="#">GitHub</a>
-        <a href="#">Demo</a>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <h3>Proiect 3</h3>
-      <p>Descriere scurtă a proiectului.</p>
-      <div class="tags">JavaScript</div>
-      <div class="links">
-        <a href="#">GitHub</a>
-        <a href="#">Demo</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section class="gallery" id="gallery">
-  <h2>Galerie</h2>
-
-  <div class="slider">
-    <img src="images/img1.png" alt="">
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>Creat de tine @AnaLazar</p>
-</footer>
-
-<!-- SCRIPTS -->
+<!-- Swiper -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<script>
-  // SCROLL ANIMATION (corect poziționat)
-  const sections = document.querySelectorAll("section");
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = 1;
-        entry.target.style.transform = "translateY(0)";
-      }
-    });
-  });
-
-  sections.forEach(sec => {
-    sec.style.opacity = 0;
-    sec.style.transform = "translateY(30px)";
-    sec.style.transition = "0.6s ease";
-    observer.observe(sec);
-  });
-
-  // SKILLS ANIMATION
-  const skills = document.querySelectorAll(".bar span");
-
-  const skillObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const value = entry.target.getAttribute("data-width");
-        entry.target.style.width = value;
-      }
-    });
-  });
-
-  skills.forEach(skill => skillObserver.observe(skill));
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
