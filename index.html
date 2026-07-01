@@ -3,34 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Portfolio</title>
+
+  <!-- FONT -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <title>Proiectul Meu</title>
 
+  <!-- SWIPER (dacă îl folosești în galerie mai târziu) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = 1;
-        entry.target.style.transform = "translateY(0)";
-      }
-    });
-  });
-
-  document.querySelectorAll("section").forEach(sec => {
-    sec.style.opacity = 0;
-    sec.style.transform = "translateY(30px)";
-    sec.style.transition = "0.6s ease";
-    observer.observe(sec);
-  });
-</script>
-  
 <body>
-  <nav class="navbar">
+
+<!-- NAVBAR -->
+<nav class="navbar">
   <div class="logo">Portfolio</div>
 
   <ul class="nav-links">
@@ -42,47 +37,51 @@
   </ul>
 </nav>
 
-  <header class="hero" id="home">
-    <h1>Numele Proiectului</h1>
-    <p>O scurtă descriere a proiectului tău personal.</p>
+<!-- HERO -->
+<header class="hero" id="home">
+  <h1>Numele Tău / Proiect</h1>
+  <p>Portofoliu modern realizat cu HTML, CSS și JavaScript.</p>
 
-    <div class="buttons">
-      <a href="#" target="_blank">Vezi Demo</a>
-      <a href="#" target="_blank">GitHub</a>
-    </div>
-  </header>
+  <div class="buttons">
+    <a href="#" target="_blank">GitHub</a>
+    <a href="#" target="_blank">Demo</a>
+  </div>
+</header>
 
-  <section class="about" id="about">
-    <h2>Despre proiect</h2>
-    <p>
-      Aici explici ce face proiectul, de ce l-ai făcut și ce problemă rezolvă.
-    </p>
-  </section>
+<!-- ABOUT -->
+<section class="about" id="about">
+  <h2>Despre</h2>
+  <p>
+    Aici explici cine ești și ce face acest proiect.
+  </p>
+</section>
 
-  <section class="skills" id="skills">
+<!-- SKILLS -->
+<section class="skills" id="skills">
   <h2>Skills</h2>
 
   <div class="skill">
     <p>HTML</p>
-    <div class="bar"><span style="width: 90%"></span></div>
+    <div class="bar"><span data-width="90%"></span></div>
   </div>
 
   <div class="skill">
     <p>CSS</p>
-    <div class="bar"><span style="width: 85%"></span></div>
+    <div class="bar"><span data-width="85%"></span></div>
   </div>
 
   <div class="skill">
     <p>JavaScript</p>
-    <div class="bar"><span style="width: 70%"></span></div>
+    <div class="bar"><span data-width="70%"></span></div>
   </div>
 
   <div class="skill">
     <p>Git / GitHub</p>
-    <div class="bar"><span style="width: 75%"></span></div>
+    <div class="bar"><span data-width="75%"></span></div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section class="projects" id="projects">
   <h2>Proiecte</h2>
 
@@ -101,7 +100,7 @@
     <div class="project-card">
       <h3>Proiect 2</h3>
       <p>Descriere scurtă a proiectului.</p>
-      <div class="tags">React • API</div>
+      <div class="tags">API • JS</div>
       <div class="links">
         <a href="#">GitHub</a>
         <a href="#">Demo</a>
@@ -121,17 +120,57 @@
   </div>
 </section>
 
-  <section class="gallery" id="gallery">
-    <h2>Galerie</h2>
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <h2>Galerie</h2>
 
-    <div class="slider">
-      <img src="images/img1.png" alt="">
-    </div>
-  </section>
+  <div class="slider">
+    <img src="images/img1.png" alt="">
+  </div>
+</section>
 
-  <footer>
-    <p>Creat de tine @AnaLazar</p>
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <p>Creat de tine @AnaLazar</p>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  // SCROLL ANIMATION (corect poziționat)
+  const sections = document.querySelectorAll("section");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = "translateY(0)";
+      }
+    });
+  });
+
+  sections.forEach(sec => {
+    sec.style.opacity = 0;
+    sec.style.transform = "translateY(30px)";
+    sec.style.transition = "0.6s ease";
+    observer.observe(sec);
+  });
+
+  // SKILLS ANIMATION
+  const skills = document.querySelectorAll(".bar span");
+
+  const skillObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const value = entry.target.getAttribute("data-width");
+        entry.target.style.width = value;
+      }
+    });
+  });
+
+  skills.forEach(skill => skillObserver.observe(skill));
+</script>
 
 </body>
 </html>
