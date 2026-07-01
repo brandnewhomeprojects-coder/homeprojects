@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const container = document.getElementById("projects");
 
+  const swipersToInit = [];
+
   projects.forEach((project, index) => {
 
     const wrapper = document.createElement("div");
@@ -19,8 +21,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
           `).join("")}
         </div>
-
-        <div class="swiper-pagination"></div>
       </div>
 
       <h2>${project.title}</h2>
@@ -29,22 +29,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     container.appendChild(wrapper);
 
+    swipersToInit.push(index);
   });
 
-  // 🔥 IMPORTANT: inițializează DUPĂ ce tot DOM-ul există
-  setTimeout(() => {
+  // 🔥 WAIT IMAGES LOAD (IMPORTANT)
+  const waitImages = () => {
+    const images = document.querySelectorAll("img");
 
-    document.querySelectorAll(".swiper").forEach((el) => {
-      new Swiper(el, {
-        loop: true,
-        spaceBetween: 10,
-        pagination: {
-          el: el.querySelector(".swiper-pagination"),
-          clickable: true,
-        }
-      });
+    return Promise.all(
+      Array.from(images).map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise(res => {
+          img.onload = img.onerror = res;
+        });
+      })
+    );
+  };
+
+  await waitImages();
+
+  // 🔥 INIT SWIPER DUPĂ LOAD
+  swipersToInit.forEach(index => {
+
+    new Swiper(`.swiper-${index}`, {
+      loop: true,
+      spaceBetween: 10,
+      observer: true,
+      observeParents: true,
+      observeSlideChildren: true,
     });
 
-  }, 50);
+  });
 
 });
