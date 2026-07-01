@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-  const res = await fetch("./data.json", { cache: "no-store" });
+  const res = await fetch("./data.json");
   const projects = await res.json();
 
   const container = document.getElementById("projects");
@@ -11,8 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     div.className = "project";
 
     div.innerHTML = `
-      <img class="project-img" src="${project.images[0]}" alt="${project.title}" />
-
+      <img class="project-img" src="${project.images[0]}" />
       <h2>${project.title}</h2>
       <p>${project.description}</p>
     `;
